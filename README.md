@@ -45,8 +45,6 @@ in the Command Prompt
 
 Watch this video for more instructions to install, configure the sytem and to see the features of the working system.
 
-https://youtu.be/XMyvfr3NRwI
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IDEHhPREOBk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://youtu.be/IDEHhPREOBk
 
 
