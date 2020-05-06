@@ -11,7 +11,7 @@
 node -- version
 npm --version
 ```
-in the Command Propt
+in the Command Prompt
 
 4. Then type npm install to install node Modules
 
