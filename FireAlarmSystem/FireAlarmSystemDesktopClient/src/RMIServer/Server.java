@@ -185,7 +185,7 @@ public class Server extends UnicastRemoteObject implements Service {
             
             //Set values of the Sensor Object in to a JSON String
             String jsonString = mapper.writeValueAsString(sensor);
-
+//add api gateway link
             //Create URL object , targeting REST APIs Endpoint to Add Sensors
             URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Add");
             
@@ -271,7 +271,7 @@ public class Server extends UnicastRemoteObject implements Service {
             
             //Set values of the Sensor Object in to a JSON String
             String jsonString = mapper.writeValueAsString(sensor);
-
+//add api gateway link
            //Create URL object , targeting REST APIs Endpoint to Update Sensors
             URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Update/" + id);
             // Create a HTTPURL Connection object and open a connection
@@ -342,7 +342,7 @@ public class Server extends UnicastRemoteObject implements Service {
     public boolean deleteSensor(String Id) throws SQLException {
 
         try {
-          
+          //add api gateway link
             //Create URL object , targeting REST APIs Endpoint to Delete Sensors
             URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Delete/" + Id);
 
@@ -393,7 +393,7 @@ public class Server extends UnicastRemoteObject implements Service {
 
         //Sensor Object
         Sensor sensor = null;
-
+//add api gateway link
         //Create URL object , targeting REST APIs Endpoint to Get Sensor BY ID
         URL url = new URL("http://localhost:8080/api/fireAlarmSystem/sensors/" + Id);
         
@@ -447,7 +447,7 @@ public class Server extends UnicastRemoteObject implements Service {
 
         //ArrayList
         ArrayList<Sensor> list = new ArrayList<>();
-
+//add api gateway link
         //Create URL object , targeting REST APIs Endpoint to Get Sensors
         URL url = new URL("http://localhost:8080/api/fireAlarmSystem/sensors");
         // Create a HTTPURL Connection object and open a connection
@@ -507,7 +507,7 @@ public class Server extends UnicastRemoteObject implements Service {
 
         try {
 
-
+//add api gateway link
             //Create URL object , targeting REST APIs Endpoint to Get Sensors
             URL url = new URL("http://localhost:8080/api/fireAlarmSystem/sensors");
             
