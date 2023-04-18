@@ -17,7 +17,8 @@ sensorRoute.post("/sensor/add", async (req, res) => {
 
   let response = await callService({
     method: "post",
-    url: `http://${ip}:${port}/sensor/add`,
+    // url: `http://${ip}:${port}/sensor/add`,
+    url: `http://${ip}:${port}/api/fireAlarmSystem/add`,
     data: req.body,
   }).catch((err) => console.log(err));
 
@@ -25,7 +26,7 @@ sensorRoute.post("/sensor/add", async (req, res) => {
     if (response.status == 200)
       return res
         .status(200)
-        .json({ data: response.data.data ? response.data.data : "success" });
+        .json(response.data);
     if (response.status == 400)
       return res.status(400).json({ error: response.data.error });
   }
@@ -93,8 +94,9 @@ sensorRoute.post("/sensor/update/:id", async (req, res) => {
   const { ip, port } = await getService("sensor-service", version);
 
   let response = await callService({
-    method: "post",
-    url: `http://${ip}:${port}/sensor/update/${req.params.id}`,
+    method: "put",
+    // url: `http://${ip}:${port}/sensor/update/${req.params.id}`,
+    url: `http://${ip}:${port}/api/fireAlarmSystem/update/${req.params.id}`,
     data: req.body,
   }).catch((err) => console.log(err));
 
@@ -102,7 +104,7 @@ sensorRoute.post("/sensor/update/:id", async (req, res) => {
     if (response.status == 200)
       return res
         .status(200)
-        .json({ data: response.data.data ? response.data.data : "success" });
+        .json(response.data);
     if (response.status == 400)
       return res.status(400).json({ error: response.data.error });
   }
