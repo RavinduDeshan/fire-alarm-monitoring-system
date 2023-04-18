@@ -126,7 +126,8 @@ sensorRoute.get("/card/getall", async (req, res) => {
     if (response.status == 200)
       return res
         .status(200)
-        .json({ data: response.data.data ? response.data.data : "success" });
+        // .json({ data: response.data.data ? response.data.data : "success" });
+        .json( response.data );
     if (response.status == 400)
       return res.status(400).json({ error: response.data.error });
   }
