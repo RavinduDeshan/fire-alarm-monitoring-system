@@ -216,6 +216,11 @@ public class SensorPanel extends javax.swing.JFrame {
 
         co2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         co2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        co2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                co2ActionPerformed(evt);
+            }
+        });
 
         smoke.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         smoke.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -384,6 +389,10 @@ public class SensorPanel extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void co2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_co2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_co2ActionPerformed
 
     /**
      * @param args the command line arguments
