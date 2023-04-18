@@ -29,7 +29,8 @@ server.on("listening", () => {
           `${process.env.SERVICEREGISTRYURL}/${process.env.SERVICENAME}/${process.env.SERVICEVERSION}/${process.env.SERVICEPORT}`
         )
         .then((res) => {
-          console.log(`Service Registered Key : ${res.data.result}`);
+        //   console.log(`Service Registered Key : ${res.data.result}`);
+        console.log("ping->...");
         })
         .catch((err) => {
           console.log(`Error on Registry : ${err}`);

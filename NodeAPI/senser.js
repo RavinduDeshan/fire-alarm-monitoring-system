@@ -10,6 +10,7 @@ router.get("/sensors", async (req, res) => {
     let result = getResponseSensorOB(sensor);
     response.push(result);
   });
+  console.warn("getting all available sensors.............................");
   res.setHeader("Content-Type", "application/json");
   res.status(200).json(response);
 });
@@ -26,6 +27,7 @@ router.post("/add", async (req, res) => {
   });
   try {
     await sensorOB.save();
+    console.warn("sensor added successfully.............................");
     res.json({ msg: "done" }), 200;
   } catch (error) {
     res.json({ msg: "error saving data" }), 400;
@@ -48,7 +50,7 @@ router.put("/update/:id", async (req, res) => {
   await sensorOB
     .save()
     .then(() => {
-      console.log("update done");
+      console.warn("sensor updated successfully.............................");
       return res.status(200).json({ data: "Successfull" });
     })
     .catch((error) => {
