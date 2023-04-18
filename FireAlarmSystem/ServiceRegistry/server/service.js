@@ -66,7 +66,7 @@ module.exports = (config) => {
 
   // eslint-disable-next-line no-unused-vars
 
-  service.use(cors({ origin: "http://localhost:3001/" }));
+  service.use(cors({ origin: "*" }));
   service.use((error, req, res, next) => {
     res.status(error.status || 500);
     // Log out the error to the console
