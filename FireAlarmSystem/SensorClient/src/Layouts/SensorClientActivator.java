@@ -147,7 +147,7 @@ public class SensorClientActivator extends javax.swing.JFrame {
             
              
                 //check if sensor was inActive
-                if(service.checkStatusInActive(ID)){
+//                if(service.checkStatusInActive(ID)){
                 
                    
                 //get Sensor ID
@@ -162,7 +162,7 @@ public class SensorClientActivator extends javax.swing.JFrame {
                     
                     //Display Sensor panel JFRAME
                     new SensorPanel(sensor).setVisible(true);
-                }
+//                }
                
                 
                     

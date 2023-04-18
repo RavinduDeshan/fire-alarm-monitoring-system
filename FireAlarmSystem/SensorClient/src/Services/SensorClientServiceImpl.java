@@ -42,6 +42,8 @@ public class SensorClientServiceImpl implements SensorClientServices{
     HttpURLConnection conn;
     
     //Database Connection Object
+    
+    private static String APIGATEWAY = "http://localhost:5000/";
 
   
 
@@ -50,6 +52,8 @@ public class SensorClientServiceImpl implements SensorClientServices{
     public boolean checkStatusInActive(String ID) throws SQLException {
        
         //hold the status
+        
+        System.out.println("This method is called checkStatusInActive");
         boolean availability =false;
         
         try {
@@ -101,7 +105,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
         
         try {
            
-
+System.out.println("This method is called upadteStateActive");
 
             //Get Sensor ID
             String id = sensor.getId();
@@ -117,7 +121,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
 
           
             //Connect endpoint
-            URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Update/"+id);
+            URL url = new URL(APIGATEWAY+"/api/fireAlarmSystem/update/"+id);
             
             //intiate connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -126,10 +130,10 @@ public class SensorClientServiceImpl implements SensorClientServices{
             conn.setRequestMethod("PUT");
             
             // Set Request Property
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setRequestProperty("Content-Type", "application/json");
 
             //Set property to accept JSON
-            conn.setRequestProperty("Accept", "application/json");
+//            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             
             //enable output Stream 
             conn.setDoOutput(true);
@@ -140,27 +144,32 @@ public class SensorClientServiceImpl implements SensorClientServices{
             //Write data in to output object
             
             OutputStream stream = conn.getOutputStream();
-            byte[] input = data.getBytes("utf-8");
+            byte[] input = data.getBytes("application/json");
             stream.write(input, 0, input.length);
 
             //get Response Code
-            int responseCode = conn.getResponseCode();
+//            int responseCode = conn.getResponseCode();
+
+int responseCode  = 200;
 
             //initate a reader
             Reader reader = null;
             
+            System.out.println("response code upadteStateActive is " + responseCode);
+            
+            responseCode =200;
             
             //Check Responses
-            if (responseCode >= 200 && responseCode <= 299) {
+            if (responseCode > 200 ) {
 
                 
-                reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "application/json"));
                 
                 //update status state
                 stat = true;
                 
             } else {
-                reader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"));
+                reader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "application/json"));
                 
 
                 //update status state
@@ -190,11 +199,13 @@ public class SensorClientServiceImpl implements SensorClientServices{
          boolean stat=false;
         
         try {
+            
+            System.out.println("This method is called upadteStateInActive");
            
 
             //set Properties
             String id = sensor.getId();
-            sensor.setStatus("Inactive");
+            sensor.setStatus("active");
             sensor.setCo2_level("0");
             sensor.setSmoke_level("0");
             
@@ -206,7 +217,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
             System.out.println("Jason String: " + jsonString);
             
             //Connect endpoint
-            URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Update/"+id);
+            URL url = new URL(APIGATEWAY+"api/fireAlarmSystem/update/"+id);
             
             //intiate connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -215,10 +226,10 @@ public class SensorClientServiceImpl implements SensorClientServices{
             conn.setRequestMethod("PUT");
 
             // Set Request Property
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setRequestProperty("Content-Type", "application/json");
 
             //Set property to accept JSON
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Content-Type", "application/json");
 
             //enable output Stream 
             conn.setDoOutput(true);
@@ -226,7 +237,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
             //Write data to output objects
             String data = jsonString;
             OutputStream stream = conn.getOutputStream();
-            byte[] input = data.getBytes("utf-8");
+            byte[] input = data.getBytes("application/json");
             stream.write(input, 0, input.length);
 
 
@@ -235,15 +246,19 @@ public class SensorClientServiceImpl implements SensorClientServices{
 
             //initaite reader
             Reader reader = null;
+            
+            responseCode =200;
+            
+            System.out.println("Inctivate point response code upadteStateInActive" + responseCode );
 
             //Check Responses
-            if (responseCode >= 200 && responseCode <= 299) {
+            if (responseCode >= 200 ) {
 
                 
-                reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "application/json"));
                 stat = true;
             } else {
-                reader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"));
+                reader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "application/json"));
                 
 
                 stat = false;
@@ -270,7 +285,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
       
 
         //Connect endpoint
-        URL url = new URL("http://localhost:8080/api/fireAlarmSystem/sensors/"+Id);
+        URL url = new URL(APIGATEWAY+"api/fireAlarmSystem/sensors/"+Id);
         
         //intiate connection
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -279,7 +294,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
         con.setRequestMethod("GET");
 
         //Set property to accept JSON
-        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
 
         //get Response Code
@@ -289,7 +304,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
         Reader reader = null;
 
         //Check Responses
-        if (responseCode >= 200 && responseCode <= 299) {
+        if (responseCode >= 200 ) {
             reader = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
         } else {
             reader = new BufferedReader(new InputStreamReader(con.getErrorStream(), "utf-8"));
@@ -345,7 +360,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
             System.out.println("Jason String: " + jsonString);
 
             //Connect endpoint
-            URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Update/"+id);
+            URL url = new URL(APIGATEWAY+"api/fireAlarmSystem/update/"+id);
             
             //intiate connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -357,7 +372,7 @@ public class SensorClientServiceImpl implements SensorClientServices{
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
             //Set property to accept JSON
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
             //enable output Stream 
             conn.setDoOutput(true);

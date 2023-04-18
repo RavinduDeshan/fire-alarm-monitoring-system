@@ -81,113 +81,113 @@ public class SensorController {
 	}
 	
 	
-	@PutMapping("/api/fireAlarmSystem/Update/{id}")
-	public ResponseEntity<?> update(@RequestBody Sensor sensor,@PathVariable Integer id) {
+	// @PutMapping("/api/fireAlarmSystem/Update/{id}")
+	// public ResponseEntity<?> update(@RequestBody Sensor sensor,@PathVariable Integer id) {
 		
-		try {
+	// 	try {
 			
 			
 			
-		//get sensor by ID	
-		Sensor existSensor = service.get(id);
+	// 	//get sensor by ID	
+	// 	Sensor existSensor = service.get(id);
 		
-		//update Sensor
-		service.save(sensor);
+	// 	//update Sensor
+	// 	service.save(sensor);
 		
-		//set initial status true		
-		stat=true;
+	// 	//set initial status true		
+	// 	stat=true;
 		
 		
-		//Check if the received sensor is a alerted(Smoke level or CO2 level >5) sensor
-		if(sensor.getCo2_level()>5 || sensor.getSmoke_level()>5) {
+	// 	//Check if the received sensor is a alerted(Smoke level or CO2 level >5) sensor
+	// 	if(sensor.getCo2_level()>5 || sensor.getSmoke_level()>5) {
 			
-			//check if temp array is empty
-				if (temp.isEmpty()) {
+	// 		//check if temp array is empty
+	// 			if (temp.isEmpty()) {
 
-					// if temp array is empty add the first sensor to temp array
-					temp.add(sensor.getId());
+	// 				// if temp array is empty add the first sensor to temp array
+	// 				temp.add(sensor.getId());
 					
-				//Sms Message
-				String MESSAGE="Fire Alert Detected on the room no "+sensor.getLocation_roomNo() +"of the floor no " +  sensor.getLocation_floorNo()+ ". Detected CO2 Level is "+ sensor.getCo2_level()+" and Smoke level is "+sensor.getSmoke_level()+". Details are detected by Sensor ID "+ sensor.getId();
+	// 			//Sms Message
+	// 			String MESSAGE="Fire Alert Detected on the room no "+sensor.getLocation_roomNo() +"of the floor no " +  sensor.getLocation_floorNo()+ ". Detected CO2 Level is "+ sensor.getCo2_level()+" and Smoke level is "+sensor.getSmoke_level()+". Details are detected by Sensor ID "+ sensor.getId();
 									
 				
-				//Authorized Message API Account
-				 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+	// 			//Authorized Message API Account
+	// 			 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 				
-				//Send SMS
+	// 			//Send SMS
 
-				 Message message = Message.creator(new PhoneNumber(TONO),new PhoneNumber(FROMNO), MESSAGE).create();
+	// 			 Message message = Message.creator(new PhoneNumber(TONO),new PhoneNumber(FROMNO), MESSAGE).create();
 
-				 //print message ID
-				 System.out.println(message.getSid());					
+	// 			 //print message ID
+	// 			 System.out.println(message.getSid());					
 					
 					
 
 					
-					//Email Body
-					EMAILBODY="<h1 style=\"color:red;\">Fire Alert Detected</h1><h2>Sensor ID : "+sensor.getId().toString()+"<br> Floor No : "+ sensor.getLocation_floorNo()+"<br> Room No : "+ sensor.getLocation_roomNo()+"</h2><h2 style=\"color:red;\"> CO2 Level : "+sensor.getCo2_level()+"<br>Smoke Level : "+sensor.getSmoke_level()+"</h2>";
-					// send email
-					new EmailGenerator(EMAILRECIEVER, "Fire Alert", EMAILBODY);
-				} 
+	// 				//Email Body
+	// 				EMAILBODY="<h1 style=\"color:red;\">Fire Alert Detected</h1><h2>Sensor ID : "+sensor.getId().toString()+"<br> Floor No : "+ sensor.getLocation_floorNo()+"<br> Room No : "+ sensor.getLocation_roomNo()+"</h2><h2 style=\"color:red;\"> CO2 Level : "+sensor.getCo2_level()+"<br>Smoke Level : "+sensor.getSmoke_level()+"</h2>";
+	// 				// send email
+	// 				new EmailGenerator(EMAILRECIEVER, "Fire Alert", EMAILBODY);
+	// 			} 
 				
-				else {
+	// 			else {
 					
 
-					for (int i : temp) {
+	// 				for (int i : temp) {
 
 						
-						if (sensor.getId() == i) {
-							stat = false;
+	// 					if (sensor.getId() == i) {
+	// 						stat = false;
 
-						}
+	// 					}
 						
 
-					}
+	// 				}
 					
 					
 					
-					if (stat) {
-						temp.add(sensor.getId());
+	// 				if (stat) {
+	// 					temp.add(sensor.getId());
 					
-					// send SMS
-						String MESSAGE = "Fire Alert Detected on the room no " + sensor.getLocation_roomNo()
-								+ "of the floor no " + sensor.getLocation_floorNo() + ". Detected CO2 Level is "
-								+ sensor.getCo2_level() + " and Smoke level is " + sensor.getSmoke_level()
-								+ ". Details are detected by Sensor ID " + sensor.getId();					
+	// 				// send SMS
+	// 					String MESSAGE = "Fire Alert Detected on the room no " + sensor.getLocation_roomNo()
+	// 							+ "of the floor no " + sensor.getLocation_floorNo() + ". Detected CO2 Level is "
+	// 							+ sensor.getCo2_level() + " and Smoke level is " + sensor.getSmoke_level()
+	// 							+ ". Details are detected by Sensor ID " + sensor.getId();					
 
-					//Authorized Message API Account
-					Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+	// 				//Authorized Message API Account
+	// 				Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
-					//Send SMS
-					Message message = Message.creator(new PhoneNumber(TONO), new PhoneNumber(FROMNO), MESSAGE).create();
+	// 				//Send SMS
+	// 				Message message = Message.creator(new PhoneNumber(TONO), new PhoneNumber(FROMNO), MESSAGE).create();
 
-					//Print Message ID
-					System.out.println(message.getSid());
+	// 				//Print Message ID
+	// 				System.out.println(message.getSid());
 	
 						
 						
 						
-						//Email Body
-						EMAILBODY="<h1 style=\"color:red;\">Fire Alert Detected</h1><h2>Sensor ID : "+sensor.getId().toString()+"<br> Floor No : "+ sensor.getLocation_floorNo()+"<br> Room No : "+ sensor.getLocation_roomNo()+"</h2><h2 style=\"color:red;\"> CO2 Level : "+sensor.getCo2_level()+"<br>Smoke Level : "+sensor.getSmoke_level()+"</h2>";
+	// 					//Email Body
+	// 					EMAILBODY="<h1 style=\"color:red;\">Fire Alert Detected</h1><h2>Sensor ID : "+sensor.getId().toString()+"<br> Floor No : "+ sensor.getLocation_floorNo()+"<br> Room No : "+ sensor.getLocation_roomNo()+"</h2><h2 style=\"color:red;\"> CO2 Level : "+sensor.getCo2_level()+"<br>Smoke Level : "+sensor.getSmoke_level()+"</h2>";
 						
-						// send email
-						new EmailGenerator(EMAILRECIEVER, "Fire Alert", EMAILBODY);
+	// 					// send email
+	// 					new EmailGenerator(EMAILRECIEVER, "Fire Alert", EMAILBODY);
 						
 
 						
-					}
+	// 				}
 
-				}
-			}
+	// 			}
+	// 		}
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+	// 	return new ResponseEntity<>(HttpStatus.OK);
 		
 		
-	}catch (NoSuchElementException e) {
+	// }catch (NoSuchElementException e) {
 		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+	// 	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	// 	}
+	// }
 	
 	
 	@DeleteMapping("/api/fireAlarmSystem/Delete/{id}")

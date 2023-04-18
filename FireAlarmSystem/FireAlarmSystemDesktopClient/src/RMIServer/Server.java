@@ -63,6 +63,7 @@ public class Server extends UnicastRemoteObject implements Service {
     Connection con = dbConnection.getConnection();
     //REGISTRY PORT NUMBER
     final static int REGISTRY=1209;
+    final static String APIGATEWAYURL = "http://localhost:5000/";
 
     
     
@@ -187,7 +188,7 @@ public class Server extends UnicastRemoteObject implements Service {
             String jsonString = mapper.writeValueAsString(sensor);
 //add api gateway link
             //Create URL object , targeting REST APIs Endpoint to Add Sensors
-            URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Add");
+            URL url = new URL(APIGATEWAYURL+"api/fireAlarmSystem/add");
             
             // Create a HTTPURL Connection object and open a connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -199,7 +200,7 @@ public class Server extends UnicastRemoteObject implements Service {
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             
             // Set the Request Property to accept JSON responses
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             
             // Set a output stream
             conn.setDoOutput(true);
@@ -262,7 +263,7 @@ public class Server extends UnicastRemoteObject implements Service {
         boolean stat = false;
 
         try {
-           
+            System.out.println("This method is called");
             //Hold Sensor ID
             String id = sensor.getId();
             
@@ -273,7 +274,7 @@ public class Server extends UnicastRemoteObject implements Service {
             String jsonString = mapper.writeValueAsString(sensor);
 //add api gateway link
            //Create URL object , targeting REST APIs Endpoint to Update Sensors
-            URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Update/" + id);
+            URL url = new URL(APIGATEWAYURL+"api/fireAlarmSystem/update/" + id);
             // Create a HTTPURL Connection object and open a connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             
@@ -281,10 +282,10 @@ public class Server extends UnicastRemoteObject implements Service {
             conn.setRequestMethod("PUT");
             
             // Set the Request Content Property
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setRequestProperty("Content-Type", "application/json");
             
             // Set the Request Property to accept JSON responses
-            conn.setRequestProperty("Accept", "application/json");
+//            conn.setRequestProperty("Content-Type", "application/json");
             
             // Set a output stream
             conn.setDoOutput(true);
@@ -344,7 +345,7 @@ public class Server extends UnicastRemoteObject implements Service {
         try {
           //add api gateway link
             //Create URL object , targeting REST APIs Endpoint to Delete Sensors
-            URL url = new URL("http://localhost:8080/api/fireAlarmSystem/Delete/" + Id);
+            URL url = new URL(APIGATEWAYURL+"api/fireAlarmSystem/Delete/" + Id);
 
            // Create a HTTPURL Connection object and open a connection
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -356,7 +357,7 @@ public class Server extends UnicastRemoteObject implements Service {
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             
             // Set the Request Property to accept JSON responses
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             
             // Set a output stream
             conn.setDoOutput(true);
@@ -395,7 +396,7 @@ public class Server extends UnicastRemoteObject implements Service {
         Sensor sensor = null;
 //add api gateway link
         //Create URL object , targeting REST APIs Endpoint to Get Sensor BY ID
-        URL url = new URL("http://localhost:8080/api/fireAlarmSystem/sensors/" + Id);
+        URL url = new URL(APIGATEWAYURL+"api/fireAlarmSystem/sensors/" + Id);
         
         // Create a HTTPURL Connection object and open a connection
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -404,7 +405,7 @@ public class Server extends UnicastRemoteObject implements Service {
         con.setRequestMethod("GET");
 
         // Set the Request  Property to accept JSON
-        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
         //Get the Responsecode
         int responseCode = con.getResponseCode();
@@ -449,7 +450,7 @@ public class Server extends UnicastRemoteObject implements Service {
         ArrayList<Sensor> list = new ArrayList<>();
 //add api gateway link
         //Create URL object , targeting REST APIs Endpoint to Get Sensors
-        URL url = new URL("http://localhost:8080/api/fireAlarmSystem/sensors");
+        URL url = new URL(APIGATEWAYURL+"api/fireAlarmSystem/sensors");
         // Create a HTTPURL Connection object and open a connection
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         
@@ -457,7 +458,7 @@ public class Server extends UnicastRemoteObject implements Service {
         con.setRequestMethod("GET");
 
         // Set the Request  Property to accept JSON
-        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
         //Get the Responsecode
         int responseCode = con.getResponseCode();
@@ -509,7 +510,7 @@ public class Server extends UnicastRemoteObject implements Service {
 
 //add api gateway link
             //Create URL object , targeting REST APIs Endpoint to Get Sensors
-            URL url = new URL("http://localhost:8080/api/fireAlarmSystem/sensors");
+            URL url = new URL(APIGATEWAYURL+"api/fireAlarmSystem/sensors");
             
             // Create a HTTPURL Connection object and open a connection
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -518,7 +519,7 @@ public class Server extends UnicastRemoteObject implements Service {
             con.setRequestMethod("GET");
             
             // Set the Request  Property to accept JSON
-            con.setRequestProperty("Accept", "application/json");
+            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
             //Get the Responsecode
             int responseCode = con.getResponseCode();
