@@ -117,7 +117,9 @@ sensorRoute.get("/card/getall", async (req, res) => {
 
   let response = await callService({
     method: "get",
-    url: `http://${ip}:${port}/card/getall`,
+    // url: `http://${ip}:${port}/card/getall`,
+    url: `http://${ip}:${port}/api/fireAlarmSystem/sensors`,
+    
   });
 
   if (response) {
