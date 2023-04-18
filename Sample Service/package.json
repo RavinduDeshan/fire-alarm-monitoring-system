@@ -1,0 +1,23 @@
+{
+  "name": "employeems",
+  "version": "1.0.0",
+  "description": "employee management micro service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "author": "Innovigent",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "mongoose": "^6.0.7",
+    "nodemon": "^2.0.13"
+  }
+}
