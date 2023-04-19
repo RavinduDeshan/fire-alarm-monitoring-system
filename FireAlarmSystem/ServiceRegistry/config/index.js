@@ -13,19 +13,19 @@ module.exports = {
   development: {
     name,
     version,
-    serviceTimeout: 5,
+    serviceTimeout: 30,
     log: () => getLogger(name, version, 'debug'),
   },
   production: {
     name,
     version,
-    serviceTimeout: 5,
+    serviceTimeout: 30,
     log: () => getLogger(name, version, 'info'),
   },
   test: {
     name,
     version,
-    serviceTimeout: 5,
+    serviceTimeout: 30,
     log: () => getLogger(name, version, 'fatal'),
   },
 };

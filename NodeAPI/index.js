@@ -37,5 +37,5 @@ server.on("listening", () => {
         });
   
     registerService();
-    const interval = setInterval(registerService, 20000);
+    const interval = setInterval(registerService, 5000);
   });
